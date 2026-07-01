@@ -4,7 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="format-detection" content="telephone=yes">
-<title>《老板AI管理工作坊》第四期课前须知</title>
+<meta name="description" content="老板AI管理工作坊第四期课前须知，2026年7月10日～12日，重庆两江新区金山意库。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="意心会">
+<meta property="og:title" content="老板AI管理工作坊&#10;第四期课前须知&#10;7月10日～12日">
+<meta property="og:description" content="第四期课前须知：课程时间、地点导航、到课准备、交通与住宿参考。">
+<meta property="og:image" content="https://yichinghui.github.io/workshop-guide-2026-07/share-logo.png?v=20260701b">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="600">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="老板AI管理工作坊&#10;第四期课前须知&#10;7月10日～12日">
+<meta name="twitter:image" content="https://yichinghui.github.io/workshop-guide-2026-07/share-logo.png?v=20260701b">
+<link rel="image_src" href="https://yichinghui.github.io/workshop-guide-2026-07/share-logo.png?v=20260701b">
+<title>老板AI管理工作坊
+第四期课前须知
+7月10日～12日</title>
 <style>
   :root {
     --blue: #0066fe;
@@ -407,7 +421,8 @@
 
   .schedule {
     display: grid;
-    gap: 12px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
   }
 
   .day {
@@ -422,27 +437,28 @@
     justify-content: space-between;
     align-items: baseline;
     gap: 10px;
-    padding: 16px;
+    padding: 12px 10px;
     border-bottom: 1px solid var(--line);
   }
 
   .day-index {
     color: var(--blue);
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 850;
-    letter-spacing: 2px;
+    letter-spacing: 1.2px;
   }
 
   .day-date {
-    font-size: 22px;
+    margin-top: 2px;
+    font-size: 17px;
     font-weight: 900;
+    line-height: 1.2;
   }
 
   .slot {
     display: grid;
-    grid-template-columns: 68px 1fr;
-    gap: 12px;
-    padding: 14px 16px;
+    gap: 3px;
+    padding: 10px;
     border-bottom: 1px solid rgba(17, 17, 17, 0.07);
   }
 
@@ -450,13 +466,15 @@
 
   .slot-part {
     color: var(--blue);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 820;
   }
 
   .slot-time {
-    font-size: 18px;
+    font-size: 13px;
+    line-height: 1.35;
     font-weight: 850;
+    overflow-wrap: anywhere;
   }
 
   .slot-desc {
@@ -465,6 +483,16 @@
     font-size: 14px;
     line-height: 1.55;
     overflow-wrap: anywhere;
+  }
+
+  .schedule-explain {
+    margin: 12px 0 0;
+    padding: 14px;
+    border-left: 3px solid var(--blue);
+    background: rgba(0, 102, 254, 0.06);
+    color: #515662;
+    font-size: 13px;
+    line-height: 1.75;
   }
 
   .checklist {
@@ -695,19 +723,13 @@
     }
 
     .schedule {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
       align-items: stretch;
+      gap: 10px;
     }
 
     .day {
       display: flex;
       flex-direction: column;
-    }
-
-    .day .slot {
-      flex: 1;
-      grid-template-columns: 1fr;
-      gap: 6px;
     }
 
     .transport {
@@ -798,6 +820,9 @@
 </style>
 </head>
 <body>
+<div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;">
+  <img src="share-logo.png" alt="意心会">
+</div>
 <main class="page" id="app"></main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -895,30 +920,31 @@
         index: "DAY 01",
         date: "7月10日",
         slots: [
-          { part: "上午", time: "10:00 - 12:30", desc: "核心教学 + 实操" },
-          { part: "下午", time: "14:00 - 18:00", desc: "深度实战 + 案例落地" },
-          { part: "晚间", time: "18:00+", desc: "Vibe Coding · 助教辅导" }
+          { part: "开课", time: "10:00" },
+          { part: "午休", time: "12:30 - 14:00" },
+          { part: "结束", time: "18:00" }
         ]
       },
       {
         index: "DAY 02",
         date: "7月11日",
         slots: [
-          { part: "上午", time: "10:00 - 12:30", desc: "核心教学 + 实操" },
-          { part: "下午", time: "14:00 - 18:00", desc: "深度实战 + 案例落地" },
-          { part: "晚间", time: "18:00+", desc: "Vibe Coding · 助教辅导" }
+          { part: "开课", time: "10:00" },
+          { part: "午休", time: "12:30 - 14:00" },
+          { part: "结束", time: "18:00" }
         ]
       },
       {
         index: "DAY 03",
         date: "7月12日",
         slots: [
-          { part: "上午", time: "10:00 - 12:30", desc: "核心教学 + 实操" },
-          { part: "下午", time: "14:00 - 18:00", desc: "深度实战 + 案例落地" },
-          { part: "晚间", time: "18:00+", desc: "成果演示 · 问题复盘 · 现场辅导" }
+          { part: "开课", time: "10:00" },
+          { part: "午休", time: "12:30 - 14:00" },
+          { part: "结束", time: "18:00" }
         ]
       }
     ],
+    scheduleNote: "老板AI管理工作坊授课内容依据每一位学员个性化需求，来设计解决方案；老师会根据大家填写的问卷来设计相应的内容，请重视工作坊问卷信息的填写。统一教学内容，不做提前披露",
     requirements: [
       {
         title: "请携带笔记本电脑（Mac / Windows 均可）",
@@ -944,6 +970,7 @@
         badge: "最近",
         price: "¥300+/晚",
         address: "重庆市两江新区金渝大道106号",
+        copyText: "重庆壹棠酒店(汽博中心金渝地铁站店)",
         desc: "距上课地点步行约 5 分钟。",
         mapLabel: "高德导航",
         links: {
@@ -955,6 +982,7 @@
         badge: "",
         price: "¥300+/晚",
         address: "重庆市两江新区加工区四路二号",
+        copyText: "全季酒店(重庆汽博中心三亚湾地铁站店)",
         desc: "距上课地点车程约 10 分钟。",
         mapLabel: "高德导航",
         links: {
@@ -966,6 +994,7 @@
         badge: "",
         price: "¥400+/晚",
         address: "重庆市两江新区栖霞路16号",
+        copyText: "重庆铂驰酒店",
         desc: "距上课地点车程约 10 分钟。",
         mapLabel: "高德导航",
         links: {
@@ -973,7 +1002,7 @@
         }
       }
     ],
-    hotelTip: "订房可在美团 / 大众点评 / 携程 / 抖音团购等平台搜索酒店官方名称。地图按钮会优先打开高德；如微信内无法直接拉起 App，可复制地址到高德地图。",
+    hotelTip: "订房可在美团 / 大众点评 / 携程 / 抖音团购等平台搜索酒店官方名称。地图按钮会优先打开高德；如微信内无法直接拉起 App，可复制酒店名到高德地图。",
     contact: {
       phone: "135 9471 9905",
       wechat: "13594719905",
@@ -1045,7 +1074,7 @@
             <div class="slot-part">${escapeHtml(slot.part)}</div>
             <div>
               <div class="slot-time">${escapeHtml(slot.time)}</div>
-              <div class="slot-desc">${escapeHtml(slot.desc)}</div>
+              ${slot.desc ? `<div class="slot-desc">${escapeHtml(slot.desc)}</div>` : ""}
             </div>
           </div>
         `).join("")}
@@ -1122,7 +1151,7 @@
         <div class="hotel-desc">${escapeHtml(hotel.desc)}</div>
         <div class="hotel-actions">
           <a class="hotel-link" href="${hotel.links.map}" target="_blank" rel="noopener">${escapeHtml(hotel.mapLabel || "高德地图")}</a>
-          <button class="hotel-link" type="button" data-copy="${escapeHtml(hotel.address)}" data-copy-label="${escapeHtml(hotel.name)}地址已复制">复制地址</button>
+          <button class="hotel-link" type="button" data-copy="${escapeHtml(hotel.copyText || hotel.name)}" data-copy-label="${escapeHtml(hotel.name)}酒店名已复制">复制酒店名</button>
         </div>
       </article>
     `).join("");
@@ -1195,6 +1224,7 @@
           <div class="section-note">每日教学、实战、复盘与现场辅导</div>
         </div>
         <div class="schedule">${renderSchedule(config.schedule)}</div>
+        <p class="schedule-explain">${escapeHtml(config.scheduleNote)}</p>
       </section>
 
       <section class="section">
@@ -1225,7 +1255,7 @@
             <div class="eyebrow">Accommodation</div>
             <h2>住宿推荐</h2>
           </div>
-          <div class="section-note">优先点高德导航，必要时复制地址</div>
+          <div class="section-note">优先点高德导航，必要时复制酒店名</div>
         </div>
         <div class="hotels">${renderHotels(config.hotels)}</div>
         <p class="lead" style="margin-top:14px;">${escapeHtml(config.hotelTip)}</p>
