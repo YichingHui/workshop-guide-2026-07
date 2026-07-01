@@ -176,30 +176,83 @@
     margin-top: 20px;
   }
 
-  .cover {
-    position: relative;
+  .lecturer-card {
     overflow: hidden;
     border: 1px solid var(--line);
     background: rgba(255, 255, 255, 0.62);
     box-shadow: var(--shadow);
-    aspect-ratio: 1.35;
     border-radius: 8px;
+    padding: 18px;
   }
 
-  .cover img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 6%;
-    filter: saturate(0.94) contrast(1.02);
+  .lecturer-label {
+    color: #9a9ca2;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 680;
   }
 
-  .cover::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(246, 243, 236, 0.02), rgba(246, 243, 236, 0.74));
+  .lecturer-name {
+    margin-top: 10px;
+    font-size: 34px;
+    line-height: 1.08;
+    font-weight: 950;
+  }
+
+  .lecturer-realname {
+    margin-top: 6px;
+    color: #777b84;
+    font-size: 16px;
+    font-weight: 720;
+  }
+
+  .lecturer-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 14px;
+  }
+
+  .lecturer-tag {
+    min-height: 28px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 9px;
+    border-radius: 7px;
+    border: 1px solid rgba(17, 17, 17, 0.13);
+    background: rgba(255, 255, 255, 0.86);
+    color: #20242b;
+    font-size: 12px;
+    font-weight: 760;
+  }
+
+  .lecturer-timeline {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .lecturer-line {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(17, 17, 17, 0.09);
+  }
+
+  .lecturer-year {
+    color: var(--blue);
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 900;
+  }
+
+  .lecturer-text {
+    color: #3f444d;
+    font-size: 13px;
+    line-height: 1.65;
+    font-weight: 620;
   }
 
   .quick-panel {
@@ -843,7 +896,17 @@
     titleSuffix: "管理工作坊",
     subtitle: "让决策回归理性 · 让信息回归秩序",
     description: "3 天沉浸式实操，带着真实经营问题到现场，从找到关键问题、拆开核心流程，到搭出可持续迭代的企业 AI 中台。",
-    coverImage: "意心会老板AI管理工作坊04期_定档海报.jpg",
+    lecturer: {
+      label: "LECTURER · 讲师介绍",
+      name: "狼格拉底",
+      realName: "赵博",
+      tags: ["意心会创始人", "AI 管理艺术家", "3 家 AI 原生基因公司创始人"],
+      timeline: [
+        { year: "2023", text: "国内首批入局 AI 领域的探索者，多位抖音头部 AI 博主的 AI 启蒙老师。" },
+        { year: "23 - 25", text: "公司全流程 AI 化实践，覆盖内容生产、客户管理、知识沉淀、团队协作、AI 招聘、财务业务数据联动。" },
+        { year: "2025.04", text: "正式对外服务 200+ 企业、30+ 行业，持续开发生产力级别 AI 智能体。" }
+      ]
+    },
     facts: [
       { label: "TIME", value: "2026年7月10日-12日" },
       { label: "PLACE", value: "重庆两江新区 · 金山意库 8栋 2-8 · 意心会 AI NATIVE 组织" },
@@ -1109,6 +1172,27 @@
     `).join("");
   }
 
+  function renderLecturer(lecturer) {
+    return `
+      <article class="lecturer-card">
+        <div class="lecturer-label">${escapeHtml(lecturer.label)}</div>
+        <div class="lecturer-name">${escapeHtml(lecturer.name)}</div>
+        <div class="lecturer-realname">${escapeHtml(lecturer.realName)}</div>
+        <div class="lecturer-tags">
+          ${lecturer.tags.map((tag) => `<span class="lecturer-tag">${escapeHtml(tag)}</span>`).join("")}
+        </div>
+        <div class="lecturer-timeline">
+          ${lecturer.timeline.map((item) => `
+            <div class="lecturer-line">
+              <div class="lecturer-year">${escapeHtml(item.year)}</div>
+              <div class="lecturer-text">${escapeHtml(item.text)}</div>
+            </div>
+          `).join("")}
+        </div>
+      </article>
+    `;
+  }
+
   function renderContentFlow(items) {
     return items.map((item) => `
       <div class="flow-item">
@@ -1150,7 +1234,7 @@
         <div class="hotel-address">地址：${escapeHtml(hotel.address)}</div>
         <div class="hotel-desc">${escapeHtml(hotel.desc)}</div>
         <div class="hotel-actions">
-          <a class="hotel-link" href="${hotel.links.map}" target="_blank" rel="noopener">${escapeHtml(hotel.mapLabel || "高德地图")}</a>
+          <a class="hotel-link" href="${hotel.links.map}" rel="noopener">${escapeHtml(hotel.mapLabel || "高德地图")}</a>
           <button class="hotel-link" type="button" data-copy="${escapeHtml(hotel.copyText || hotel.name)}" data-copy-label="${escapeHtml(hotel.name)}酒店名已复制">复制酒店名</button>
         </div>
       </article>
@@ -1174,16 +1258,14 @@
         <p class="lead">${escapeHtml(config.description)}</p>
 
         <div class="hero-grid">
-          <figure class="cover" aria-label="第四期定档海报预览">
-            <img src="${config.coverImage}" alt="老板AI管理工作坊第四期定档海报">
-          </figure>
+          ${renderLecturer(config.lecturer)}
           <div class="quick-panel">
             ${renderFacts(config.facts)}
           </div>
         </div>
 
         <div class="actions">
-          <a class="action primary" href="${config.links.map}" target="_blank" rel="noopener">一键导航</a>
+          <a class="action primary" href="${config.links.map}" rel="noopener">一键导航</a>
           <a class="action" href="${config.links.phone}">拨打电话</a>
         </div>
       </section>
