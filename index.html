@@ -193,20 +193,6 @@
     gap: 10px;
   }
 
-  .promo-card {
-    overflow: hidden;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.72);
-    box-shadow: var(--shadow);
-  }
-
-  .promo-card img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
   .content-grid {
     display: grid;
     gap: 10px;
@@ -239,6 +225,53 @@
     font-size: 14px;
     line-height: 1.7;
     overflow-wrap: anywhere;
+  }
+
+  .content-list {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .content-list li {
+    position: relative;
+    padding-left: 16px;
+    color: #626773;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .content-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+
+  .scene-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .scene-tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 10px;
+    border: 1px solid rgba(0, 102, 254, 0.22);
+    border-radius: 7px;
+    color: var(--blue);
+    background: rgba(0, 102, 254, 0.05);
+    font-size: 13px;
+    font-weight: 760;
   }
 
   .flow-grid {
@@ -519,11 +552,16 @@
   }
 
   .hotel-desc,
+  .hotel-address,
   .transport-desc {
     color: #70747d;
     font-size: 13px;
     line-height: 1.6;
     overflow-wrap: anywhere;
+  }
+
+  .hotel-address {
+    color: #4f5561;
   }
 
   .hotel-actions {
@@ -544,6 +582,8 @@
     color: var(--blue);
     font-size: 13px;
     font-weight: 760;
+    font-family: inherit;
+    cursor: pointer;
   }
 
   .contact {
@@ -762,6 +802,13 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
+  const AMAP_SRC = "yixinhui-workshop";
+
+  function amapNavigation({ lon, lat, name, mode = "car" }) {
+    const to = [lon, lat, name].map((value) => encodeURIComponent(value)).join(",");
+    return `https://uri.amap.com/navigation?to=${to}&mode=${encodeURIComponent(mode)}&policy=1&src=${encodeURIComponent(AMAP_SRC)}&callnative=1`;
+  }
+
   const GUIDE_CONFIG = {
     brand: "意心会",
     issueLabel: "第 四 期 · 课 前 须 知",
@@ -778,35 +825,69 @@
       { label: "FORMAT", value: "3 天现场闭环 · 找问题、拆流程、搭中台、做 Agent、现场迭代" }
     ],
     contentIntro: {
-      image: "课程内容宣传长图.jpg",
-      title: "找到那个百万级经营问题",
-      text: "这次训练不是泛泛学习 AI 工具，而是围绕企业真实经营问题，把老板经验、客户资产、项目流程、销售跟进、知识沉淀等关键资产，重建进企业 AI 中台。"
+      title: "带着真实经营问题来，现场搭出企业 AI 中台雏形",
+      text: "这次训练不是泛泛学习 AI 工具，而是围绕企业真实经营问题，把老板经验、客户资产、项目流程、销售跟进、知识沉淀等关键资产，整理进企业 AI 中台。现场会从一个具体问题出发，拆流程、接资料、做 Agent，并形成回公司后的落地路线。"
     },
     contentModules: [
       {
-        title: "找到真正值得解决的经营问题",
-        text: "先从老板和团队最卡的地方切入：高级员工能力复制、销售转化、客户跟进、库存与现金流、项目周转、直播/内容转化等，找到最值得被 AI 放大的关键问题。"
+        title: "找到真正值得 AI 化的经营问题",
+        text: "先从老板和团队最卡的地方切入，找到最值得被 AI 放大的业务杠杆。",
+        points: [
+          "能不能复制老板和顶级员工的能力？",
+          "能不能持续提升销售转化和客户跟进？",
+          "能不能优化库存、现金流、项目周转和成本结构？",
+          "能不能找到直接影响利润增长的关键动作？",
+          "能不能实时汇总经营信息，辅助团队决策？"
+        ]
       },
       {
         title: "老板如何用 AI 管理公司信息资产",
-        text: "把微信沟通、客户记录、项目资料、SOP、知识文档、销售话术、财务/业务数据从散乱文件，整理为可检索、可调用、可复盘的信息中台。"
+        text: "把微信沟通、客户记录、项目资料、SOP、知识文档、销售话术、财务/业务数据从散乱文件，整理为可检索、可调用、可复盘的信息中台。",
+        points: [
+          "把老板经验沉淀成可复用的判断标准。",
+          "把客户资料、项目记录、知识文档转成 AI 可调用资产。",
+          "让信息从个人记忆里释放出来，进入组织的公共工作系统。"
+        ]
       },
       {
         title: "AI 时代下的组织形态变革",
-        text: "重新理解老板、核心员工、AI Agent、外部工具之间的分工，让组织从“人盯人、靠记忆、靠经验”转向“知识资产驱动 + 人机协同”。"
+        text: "重新理解老板、核心员工、AI Agent、外部工具之间的分工，让组织从“人盯人、靠记忆、靠经验”转向“知识资产驱动 + 人机协同”。",
+        points: [
+          "老板负责定义关键问题和决策标准。",
+          "核心员工负责沉淀流程、验证结果、持续迭代。",
+          "AI Agent 负责读取资料、执行任务、输出可复盘结果。"
+        ]
       },
       {
         title: "AI 中台如何驱动企业经营管理",
-        text: "围绕经营问题拆流程、搭中台、做 Agent，把客户、内容、项目、知识、销售跟进等流程串起来，让 AI 进入日常决策、执行和复盘。"
+        text: "围绕经营问题拆流程、搭中台、做 Agent，把客户、内容、项目、知识、销售跟进等流程串起来，让 AI 进入日常决策、执行和复盘。",
+        points: [
+          "经营问题：从增长、管理、交付、降本里确认优先级。",
+          "业务流程：把团队脑子里的隐性判断拆成执行节点。",
+          "数据资料：接入微信、飞书、知识库、客户资料和交付记录。",
+          "AI Agent：围绕真实业务场景搭建 AI 助手与工作流。",
+          "团队决策：形成老板、核心高管和中台负责人共同指挥 AI 的方式。"
+        ]
       }
     ],
     contentFlow: [
-      { day: "DAY 01", title: "找问题 · 拆流程", text: "锁定企业真实经营问题，拆开当前流程、信息资产和关键决策节点。" },
-      { day: "DAY 02", title: "搭中台 · 做 Agent", text: "把资料、知识、客户与流程放进中台，并搭建可执行的 AI Agent 原型。" },
-      { day: "DAY 03", title: "现场迭代 · 成果路演", text: "围绕真实业务场景迭代，完成演示、复盘和下一步落地计划。" }
+      { day: "DAY 01", title: "找问题 · 拆流程", text: "锁定企业当前最关键的经营问题，拆清业务流程、输入输出、责任人和交付节点。" },
+      { day: "DAY 02", title: "搭中台 · 做 Agent", text: "把资料、客户信息、知识库和工作流接入企业 AI 中台雏形，搭建可演示的 AI Agent。" },
+      { day: "DAY 03", title: "现场迭代 · 成果路演", text: "围绕真实业务场景迭代，完成演示、复盘，并明确回公司后的团队分工和下一步落地动作。" }
+    ],
+    contentScenes: [
+      "内容生产",
+      "客户管理",
+      "销售跟进",
+      "知识沉淀",
+      "项目交付",
+      "私域转化",
+      "业务数据联动",
+      "老板经营看板",
+      "团队协同流程"
     ],
     links: {
-      map: "https://uri.amap.com/search?keyword=%E9%87%91%E5%B1%B1%E6%84%8F%E5%BA%938%E6%A0%8B2-8%20%E6%84%8F%E5%BF%83%E4%BC%9A%20%E9%87%8D%E5%BA%86%E4%B8%A4%E6%B1%9F%E6%96%B0%E5%8C%BA&city=%E9%87%8D%E5%BA%86&callnative=1",
+      map: amapNavigation({ lon: "106.574522", lat: "29.628454", name: "金山意库8栋2-8" }),
       phone: "tel:13594719905"
     },
     schedule: [
@@ -859,37 +940,40 @@
     ],
     hotels: [
       {
-        name: "宜棠酒店式服务公寓",
+        name: "重庆壹棠酒店",
         badge: "最近",
         price: "¥300+/晚",
-        desc: "上课地点同一园区，步行约 5 分钟。",
+        address: "重庆市两江新区金渝大道106号",
+        desc: "距上课地点步行约 5 分钟。",
+        mapLabel: "高德导航",
         links: {
-          map: "https://uri.amap.com/search?keyword=%E5%AE%9C%E6%A3%A0%E9%85%92%E5%BA%97%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%85%AC%E5%AF%93%20%E9%87%91%E5%B1%B1%E6%84%8F%E5%BA%93%20%E9%87%8D%E5%BA%86&city=%E9%87%8D%E5%BA%86&callnative=1",
-          booking: "https://www.amap.com/search?query=%E5%AE%9C%E6%A3%A0%E9%85%92%E5%BA%97%E5%BC%8F%E6%9C%8D%E5%8A%A1%E5%85%AC%E5%AF%93%20%E9%87%91%E5%B1%B1%E6%84%8F%E5%BA%93%20%E9%87%8D%E5%BA%86"
+          map: amapNavigation({ lon: "106.575149", lat: "29.631298", name: "重庆壹棠酒店(汽博中心金渝地铁站店)" })
         }
       },
       {
-        name: "全季酒店",
+        name: "全季酒店(重庆汽博中心三亚湾地铁站店)",
         badge: "",
         price: "¥300+/晚",
-        desc: "重庆汽博中心 · 三亚湾地铁站店，距上课地点车程约 10 分钟。",
+        address: "重庆市两江新区加工区四路二号",
+        desc: "距上课地点车程约 10 分钟。",
+        mapLabel: "高德导航",
         links: {
-          map: "https://uri.amap.com/search?keyword=%E5%85%A8%E5%AD%A3%E9%85%92%E5%BA%97%20%E9%87%8D%E5%BA%86%E6%B1%BD%E5%8D%9A%E4%B8%AD%E5%BF%83%20%E4%B8%89%E4%BA%9A%E6%B9%BE%E5%9C%B0%E9%93%81%E7%AB%99%E5%BA%97&city=%E9%87%8D%E5%BA%86&callnative=1",
-          booking: "https://www.amap.com/search?query=%E5%85%A8%E5%AD%A3%E9%85%92%E5%BA%97%20%E9%87%8D%E5%BA%86%E6%B1%BD%E5%8D%9A%E4%B8%AD%E5%BF%83%20%E4%B8%89%E4%BA%9A%E6%B9%BE%E5%9C%B0%E9%93%81%E7%AB%99%E5%BA%97"
+          map: amapNavigation({ lon: "106.579552", lat: "29.637378", name: "全季酒店(重庆汽博中心三亚湾地铁站店)" })
         }
       },
       {
-        name: "铂驰酒店",
+        name: "重庆铂驰酒店",
         badge: "",
         price: "¥400+/晚",
+        address: "重庆市两江新区栖霞路16号",
         desc: "距上课地点车程约 10 分钟。",
+        mapLabel: "高德导航",
         links: {
-          map: "https://uri.amap.com/search?keyword=%E9%93%82%E9%A9%B0%E9%85%92%E5%BA%97%20%E9%87%91%E5%B1%B1%E6%84%8F%E5%BA%93%20%E9%87%8D%E5%BA%86&city=%E9%87%8D%E5%BA%86&callnative=1",
-          booking: "https://www.amap.com/search?query=%E9%93%82%E9%A9%B0%E9%85%92%E5%BA%97%20%E9%87%91%E5%B1%B1%E6%84%8F%E5%BA%93%20%E9%87%8D%E5%BA%86"
+          map: amapNavigation({ lon: "106.567344", lat: "29.638455", name: "重庆铂驰酒店" })
         }
       }
     ],
-    hotelTip: "订房路径可用美团 / 大众点评 / 抖音团购等自行甄别对比。以上为住宿参考，不做定向推荐。",
+    hotelTip: "订房可在美团 / 大众点评 / 携程 / 抖音团购等平台搜索酒店官方名称。地图按钮会优先打开高德；如微信内无法直接拉起 App，可复制地址到高德地图。",
     contact: {
       phone: "135 9471 9905",
       wechat: "13594719905",
@@ -987,6 +1071,11 @@
         <div class="content-index">MODULE ${String(index + 1).padStart(2, "0")}</div>
         <div class="content-title">${escapeHtml(item.title)}</div>
         <div class="content-text">${escapeHtml(item.text)}</div>
+        ${item.points ? `
+          <ul class="content-list">
+            ${item.points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}
+          </ul>
+        ` : ""}
       </article>
     `).join("");
   }
@@ -1001,6 +1090,10 @@
         </div>
       </div>
     `).join("");
+  }
+
+  function renderSceneTags(items) {
+    return items.map((item) => `<span class="scene-tag">${escapeHtml(item)}</span>`).join("");
   }
 
   function renderTransportation(items) {
@@ -1025,10 +1118,11 @@
           </div>
           <div class="price">${escapeHtml(hotel.price)}</div>
         </div>
+        <div class="hotel-address">地址：${escapeHtml(hotel.address)}</div>
         <div class="hotel-desc">${escapeHtml(hotel.desc)}</div>
         <div class="hotel-actions">
-          <a class="hotel-link" href="${hotel.links.map}" target="_blank" rel="noopener">打开地图</a>
-          <a class="hotel-link" href="${hotel.links.booking}" target="_blank" rel="noopener">查看订房</a>
+          <a class="hotel-link" href="${hotel.links.map}" target="_blank" rel="noopener">${escapeHtml(hotel.mapLabel || "高德地图")}</a>
+          <button class="hotel-link" type="button" data-copy="${escapeHtml(hotel.address)}" data-copy-label="${escapeHtml(hotel.name)}地址已复制">复制地址</button>
         </div>
       </article>
     `).join("");
@@ -1078,15 +1172,18 @@
           <div class="content-title">${escapeHtml(config.contentIntro.title)}</div>
           <div class="content-text">${escapeHtml(config.contentIntro.text)}</div>
         </article>
-        <div class="promo-card" aria-label="课程内容宣传长图">
-          <img src="${config.contentIntro.image}" alt="老板AI管理工作坊课程内容宣传长图" loading="lazy">
-        </div>
         <div class="content-grid" style="margin-top:12px;">
           ${renderContentModules(config.contentModules)}
         </div>
         <div class="flow-grid">
           ${renderContentFlow(config.contentFlow)}
         </div>
+        <article class="content-card" style="margin-top:12px;">
+          <div class="content-index">SCENES</div>
+          <div class="content-title">建议带来的业务场景</div>
+          <div class="content-text">现场会围绕真实场景做拆解和搭建，建议提前选 1-2 个最想落地的方向。</div>
+          <div class="scene-tags">${renderSceneTags(config.contentScenes)}</div>
+        </article>
       </section>
 
       <section class="section">
@@ -1128,7 +1225,7 @@
             <div class="eyebrow">Accommodation</div>
             <h2>住宿推荐</h2>
           </div>
-          <div class="section-note">可点开地图或订房搜索页</div>
+          <div class="section-note">优先点高德导航，必要时复制地址</div>
         </div>
         <div class="hotels">${renderHotels(config.hotels)}</div>
         <p class="lead" style="margin-top:14px;">${escapeHtml(config.hotelTip)}</p>
@@ -1164,7 +1261,7 @@
   app.addEventListener("click", (event) => {
     const button = event.target.closest("[data-copy]");
     if (!button) return;
-    copyText(button.dataset.copy, "微信号已复制");
+    copyText(button.dataset.copy, button.dataset.copyLabel || "微信号已复制");
   });
 </script>
 </body>
